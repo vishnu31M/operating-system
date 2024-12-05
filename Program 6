@@ -1,0 +1,48 @@
+#include <stdio.h>
+
+typedef struct { int id, burst, priority, remaining; } Process;
+
+int main() {
+    Process p[] = {{1, 8, 2, 8}, {2, 4, 1, 4}, {3, 9, 3, 9}};
+    int n = 3, time = 0, completed = 0;
+
+    while (completed < n) {
+        int idx = -1, minPriority = 1e9;
+        for (int i = 0; i < n; i++)
+            if (p[i].remaining > 0 && p[i].priority < minPriority)
+                minPriority = p[i].priority, idx = i;
+
+        if (idx != -1) {
+            printf("Time %d: Process %d\n", time, p[idx].id);
+            p[idx].remaining--;
+            if (p[idx].remaining == 0) completed++;
+        }
+        time++;
+    }
+    return 0;
+}
+Time 0: Process 2
+Time 1: Process 2
+Time 2: Process 2
+Time 3: Process 2
+Time 4: Process 1
+Time 5: Process 1
+Time 6: Process 1
+Time 7: Process 1
+Time 8: Process 1
+Time 9: Process 1
+Time 10: Process 1
+Time 11: Process 1
+Time 12: Process 3
+Time 13: Process 3
+Time 14: Process 3
+Time 15: Process 3
+Time 16: Process 3
+Time 17: Process 3
+Time 18: Process 3
+Time 19: Process 3
+Time 20: Process 3
+
+
+=== Code Execution Successful ===
+=== Session Ended. Please Run the code again ===
